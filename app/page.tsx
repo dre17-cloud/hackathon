@@ -1,12 +1,12 @@
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center">
+    <main className="min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center text-center px-6">
 
       <h1 className="text-5xl font-bold mb-6">
         AI Study Assistant
       </h1>
 
-      <p className="text-gray-400 text-lg mb-10 text-center max-w-xl">
+      <p className="text-gray-400 text-lg mb-10 max-w-xl">
         Upload study materials and get personalized learning resources.
         Our AI finds the best notes, videos, and tutorials for your learning style.
       </p>
@@ -28,5 +28,5 @@ export default function Home() {
       </div>
 
     </main>
-  )
+  );
 }
