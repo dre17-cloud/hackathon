@@ -1,11 +1,17 @@
+import Image from "next/image";
+
 export default function Navbar() {
   return (
 
     <nav className="w-full bg-gray-900 text-white p-4 flex justify-between items-center">
 
-      <h1 className="text-xl font-bold">
-        AI Study Assistant
-      </h1>
+    <Image
+    src="/iconnect.PNG"
+    alt="IConnect Logo"
+    width={120}
+    height={40}
+    className="object-contain"
+    />
 
       <div className="flex gap-6">
 
