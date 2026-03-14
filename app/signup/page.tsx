@@ -44,8 +44,8 @@ export default function Signup() {
     if (error) {
       setErrorMessage(error.message);
     } else {
-      alert("Account created successfully!");
-      router.push("/login");
+     alert("Account created successfully!");
+      router.push("/onboarding");
     }
   }
 
