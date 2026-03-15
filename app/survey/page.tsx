@@ -1,5 +1,7 @@
 "use client"
 
+import React from "react"
+
 import { useRouter } from "next/navigation"
 import { useState, useEffect, useCallback } from "react"
 import { supabase } from "../../lib/supabase"
@@ -21,36 +23,31 @@ function Field({
   value: string
   onChange: (v: string) => void
 }) {
+  const [confirmed, setConfirmed] = React.useState(false)
+
+  // Reset confirmed if value is cleared
+  React.useEffect(() => {
+    if (!value) setConfirmed(false)
+  }, [value])
+
   return (
-    <div style={{
+    <div className="survey-field" style={{
       display: "flex", alignItems: "center", gap: 12,
       background: "rgba(0,0,0,0.3)", border: "1.5px solid rgba(75,85,99,0.4)",
       borderRadius: 14, padding: "0 16px", height: 52,
-      transition: "border-color 0.2s, box-shadow 0.2s",
-    }}
-      onFocus={(e) => {
-        const el = e.currentTarget as HTMLElement
-        el.style.borderColor = "#22c55e"
-        el.style.boxShadow = "0 0 0 3px rgba(34,197,94,0.12)"
-      }}
-      onBlur={(e) => {
-        const el = e.currentTarget as HTMLElement
-        el.style.borderColor = "rgba(75,85,99,0.4)"
-        el.style.boxShadow = "none"
-      }}
-    >
+    }}>
       {icon}
       <input
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        // 16px prevents iOS auto-zoom
+        onKeyDown={(e) => { if (e.key === "Enter" && value.trim()) setConfirmed(true) }}
         style={{
           flex: 1, background: "transparent", border: "none", outline: "none",
           color: "#e5e7eb", fontSize: 16, fontFamily: "'Outfit', sans-serif",
         }}
       />
-      {value && <span style={{ color: "#22c55e", fontSize: 16, flexShrink: 0 }}>✓</span>}
+      <span style={{ color: "#22c55e", fontSize: 16, flexShrink: 0, visibility: confirmed ? "visible" : "hidden", width: 16, display: "inline-block" }}>✓</span>
     </div>
   )
 }
@@ -127,6 +124,8 @@ export default function Survey() {
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes spin{to{transform:rotate(360deg)}}
         .survey-page *{font-family:'Outfit',sans-serif}
+        .survey-field{transition:border-color 0.2s ease, box-shadow 0.2s ease}
+        .survey-field:focus-within{border-color:#22c55e !important;box-shadow:0 0 0 3px rgba(34,197,94,0.12)}
         .pill-btn{transition:opacity 0.15s ease}
         .pill-btn:active{opacity:0.7}
       `}</style>
