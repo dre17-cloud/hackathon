@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar"
+import ConditionalNavbar from "../components/ConditionalNavbar"
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -29,7 +29,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-950 text-white`}
       >
         {/* Navigation Bar */}
-        <Navbar />
+        <ConditionalNavbar />
 
         {/* Page Content */}
         <main className="p-6">
